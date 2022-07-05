@@ -1,4 +1,4 @@
-#define whd "whd"
+ï»¿#define whd "whd"
 #define WINDOWS_PLATFORM
 #include <common_type.h>
 #include <ModuleSDK.h>
@@ -18,18 +18,18 @@
 void saveTempMatrix(std::string dir, short* pY16Data, const int& iWidth, const int& iHeight);
 HANDLE_T  g_Module = 0;
 int flat = 1;
-//Éú³ÉµÄÎÂ¶È¾ØÕó±£´æµÄ¹Ì¶¨Â·¾¶
+//ç”Ÿæˆçš„æ¸©åº¦çŸ©é˜µä¿å­˜çš„å›ºå®šè·¯å¾„
 std::string tempDir = "D:\\vs\\GuTest00\\tempData";
 
-//´¦ÀíºìÍâÔ­Ê¼Êı¾İ£¬Í¨¹ıÔ­Ê¼Êı¾İÕë¶ÔÈÎÒâµã£¬Í¨¹ıy16Êı¾İ½øĞĞ²âÎÂ£¬
-//Í¬Ê±Ò²¿ÉÒÔÍ¨¹ıÔ­Ê¼y16µÃµ½×î¸ßºÍ×îµÍµÄy16Öµ£¬Ëã³ö×î¸ßÎÂºÍ×îµÍÎÂ£¬±ÜÃâÈ«Ö¡²âÎÂ¼ÆËã×î¸ß×îµÍÎÂ
-//´Ë´¦Àí¿ÉÒÔµ¥¶À·ÅÔÚ¶ÀÁ¢Ïß³ÌÖĞÖ´ĞĞ£¬·ÀÖ¹ÔÚcbFuncHandleÖĞÖ´ĞĞ£¬Ó°Ïì»Øµ÷º¯Êı·µ»Ø
+//å¤„ç†çº¢å¤–åŸå§‹æ•°æ®ï¼Œé€šè¿‡åŸå§‹æ•°æ®é’ˆå¯¹ä»»æ„ç‚¹ï¼Œé€šè¿‡y16æ•°æ®è¿›è¡Œæµ‹æ¸©ï¼Œ
+//åŒæ—¶ä¹Ÿå¯ä»¥é€šè¿‡åŸå§‹y16å¾—åˆ°æœ€é«˜å’Œæœ€ä½çš„y16å€¼ï¼Œç®—å‡ºæœ€é«˜æ¸©å’Œæœ€ä½æ¸©ï¼Œé¿å…å…¨å¸§æµ‹æ¸©è®¡ç®—æœ€é«˜æœ€ä½æ¸©
+//æ­¤å¤„ç†å¯ä»¥å•ç‹¬æ”¾åœ¨ç‹¬ç«‹çº¿ç¨‹ä¸­æ‰§è¡Œï¼Œé˜²æ­¢åœ¨cbFuncHandleä¸­æ‰§è¡Œï¼Œå½±å“å›è°ƒå‡½æ•°è¿”å›
 void handleY16Data(short* pY16Data, const int& iLen, const int& iWidth, const int& iHeight) {
 	if (iLen != iWidth * iHeight) {
 		std::cout << "invalid data size ,drop it!" << std::endl;
 		return;
 	}
-	//Ä£Äâµã²âÎÂ
+	//æ¨¡æ‹Ÿç‚¹æµ‹æ¸©
 	int iPosX = 100;
 	int iPosY = 60;
 	/*int W = iWidth;
@@ -43,13 +43,13 @@ void handleY16Data(short* pY16Data, const int& iLen, const int& iWidth, const in
 			short iPosY16 = pY16Data[iPosMeasure];
 			//std::cout << "iPosY16 point error " << iPosY16 << std::endl;
 			float fSurfaceT = 0;
-			//Õë¶ÔÈËÌå²âÎÂ£¬ĞèÒª½«Ìå±íÎÂ¶ÈÓ³Éäµ½ÈËÌåÎÂ¶È
+			//é’ˆå¯¹äººä½“æµ‹æ¸©ï¼Œéœ€è¦å°†ä½“è¡¨æ¸©åº¦æ˜ å°„åˆ°äººä½“æ¸©åº¦
 			if (MeasureTempByY16(g_Module, iPosY16, &fSurfaceT) != GUIDEIR_OK) {
 				std::cout << "measure point error , posx : " << iPosX << " posy: " << iPosY << std::endl;
 				return;
 			}
 			else {
-				//Õë¶ÔÈËÌå²âÎÂ£¬ĞèÒª½«Ìå±íÎÂ¶ÈÓ³Éäµ½ÈËÌåÎÂ¶È
+				//é’ˆå¯¹äººä½“æµ‹æ¸©ï¼Œéœ€è¦å°†ä½“è¡¨æ¸©åº¦æ˜ å°„åˆ°äººä½“æ¸©åº¦
 				float env;
 				MeasureParamsControl(g_Module, GET_AMBIENT_TEMP, &env);
 				float fBodyT = 0;
@@ -70,7 +70,7 @@ void handleY16Data(short* pY16Data, const int& iLen, const int& iWidth, const in
 		}
 	}
 }
-//Éú³ÉÊµÊ±ÎÂ¶È¾ØÕó£¬±£´æÔÚÎÄ¼ş-µ±Ç°ÏµÍ³ÈÕÆÚ.txtÖĞ
+//ç”Ÿæˆå®æ—¶æ¸©åº¦çŸ©é˜µï¼Œä¿å­˜åœ¨æ–‡ä»¶-å½“å‰ç³»ç»Ÿæ—¥æœŸ.txtä¸­
 void saveTempMatrix(std::string dir, short* pY16Data, const int& iWidth, const int& iHeight) {
 	if (dir.empty()){
 		return;
@@ -78,11 +78,11 @@ void saveTempMatrix(std::string dir, short* pY16Data, const int& iWidth, const i
 	char pStrPath1[256];
 	//char *m = new char[147457];
 	//std::string s = "27.891";
-	//»ñÈ¡ÏµÍ³µ±Ç°µÄÊ±¼ä
+	//è·å–ç³»ç»Ÿå½“å‰çš„æ—¶é—´
 	std::time_t currTime = time(NULL);
 	struct tm mt;
 	localtime_s(&mt ,&currTime);
-	//»ñÈ¡ºÁÃëÊ±¼ä¶Î
+	//è·å–æ¯«ç§’æ—¶é—´æ®µ
 	struct timeb tb; 
 	ftime(&tb);
 	sprintf_s(pStrPath1,256, "\\%d%02d%02d%02d%02d%02d%04d.txt", mt.tm_year + 1900, mt.tm_mon + 1, mt.tm_mday, mt.tm_hour, mt.tm_min, mt.tm_sec, tb.millitm);
@@ -92,96 +92,100 @@ void saveTempMatrix(std::string dir, short* pY16Data, const int& iWidth, const i
 	file.open("D:\\vs\\tmepMaxtrix-6.10-01.txt");
 	*/
 	file.open(filename);
-	float* tempMatrix = (float*)malloc(iHeight * iWidth * sizeof(float));
-	//memset(tempMatrix, 0.0, sizeof(int) * iHeight * iWidth);
-	float* tempMatrixColumn = (float*)malloc( iWidth * sizeof(float));
-	/*printf("tempMatrix is:\n");
-	for (int i = 0; i < W * H; i++) {
-		printf("%f ", tempMatrix[i]);
-		if ((i + 1) % W == 0) {
-			printf("\n");
-		}
-	}*/
-	//¼ÆËãÎÂ¶È¾ØÕó
-	if (MeasureTempMatrix(g_Module, pY16Data, 0, 0, iWidth, iHeight, tempMatrix) != GUIDEIR_OK) {
-		std::cout << "measure tempMatrix error  " << std::endl;
-		return;
-	}
-	else {
+	float* tempMatrix = nullptr;
+	tempMatrix = (FLOAT_T *) malloc ((sizeof(FLOAT_T)) *iHeight * iWidth );
+	if (tempMatrix) {
+		//memset(tempMatrix, 0.000, sizeof(float) * iHeight * iWidth);
+		//float* tempMatrixColumn = (float*)malloc( iWidth * sizeof(float));
 		/*printf("tempMatrix is:\n");
 		for (int i = 0; i < W * H; i++) {
-			printf("%.2f ", tempMatrix[i]);
-			if ((i + 1) %W == 0) {
+			printf("%f ", tempMatrix[i]);
+			if ((i + 1) % W == 0) {
 				printf("\n");
 			}
 		}*/
-		/*for (int i = 0, k = 0; i < iHeight * iWidth; i++) {
-			char temp[30];
-			sprintf_s(temp, 30, "%.3f", tempMatrix[i]);
-			m[k] = temp[0];
-			m[k + 1] = temp[1];
-			m[k + 2] = temp[2];
-			m[k + 3] = temp[3];
-			if (i!= (iHeight * iWidth)-1) {
-				m[k + 4] = ',';
+		//è®¡ç®—æ¸©åº¦çŸ©é˜µ
+		if (MeasureTempMatrix(g_Module, pY16Data, 0, 0, iWidth, iHeight, tempMatrix) != GUIDEIR_OK) {
+			std::cout << "measure tempMatrix error  " << std::endl;
+			return;
+		}
+		else {
+			/*printf("tempMatrix is:\n");
+			for (int i = 0; i < W * H; i++) {
+				printf("%.2f ", tempMatrix[i]);
+				if ((i + 1) %W == 0) {
+					printf("\n");
+				}
+			}*/
+			/*for (int i = 0, k = 0; i < iHeight * iWidth; i++) {
+				char temp[30];
+				sprintf_s(temp, 30, "%.3f", tempMatrix[i]);
+				m[k] = temp[0];
+				m[k + 1] = temp[1];
+				m[k + 2] = temp[2];
+				m[k + 3] = temp[3];
+				if (i!= (iHeight * iWidth)-1) {
+					m[k + 4] = ',';
+				}
+				k = k + 5;
+			}*/
+			//std::cout << "m is" << m << std::endl;
+
+
+			//newå®Œå¯¹è±¡ä¹‹åè¦é‡Šæ”¾
+			/*delete[] m;
+			m = NULL;
+			delete[] tempMatrix;
+			tempMatrix = NULL;
+			delete[] tempMatrixColumn;
+			tempMatrixColumn = NULL;*/
+			//free(tempMatrixColumn);
+			//sprintf_s(m, 25, "%d", tempMatrix[0]);
+
+
+			if (tempMatrix) {
+				for (int i = 0, k = 0; i < iHeight * iWidth; i++) {
+					file << std::setprecision(2) << std::fixed << tempMatrix[i] << ",";
+					k++;
+					if ((i + 1) % iWidth == 0) {
+						file << std::endl;
+						k = 0;
+					}
+				}
 			}
-			k = k + 5;
-		}*/
-		//std::cout << "m is" << m << std::endl;
-
-
-		//newÍê¶ÔÏóÖ®ºóÒªÊÍ·Å
-		/*delete[] m;
-		m = NULL;
-		delete[] tempMatrix;
-		tempMatrix = NULL;
-		delete[] tempMatrixColumn;
-		tempMatrixColumn = NULL;*/
+		}
 		free(tempMatrix);
-		//free(tempMatrixColumn);
-		//sprintf_s(m, 25, "%d", tempMatrix[0]);
-
-
-		for (int i = 0, k = 0; i < iHeight * iWidth; i++) {
-			tempMatrixColumn[k] = tempMatrix[i];
-			file << std::setprecision(2) << std::fixed << tempMatrixColumn[k] << ",";
-			k++;
-			if ((i + 1) % iWidth == 0) {
-				file << std::endl;
-				k = 0;
-			}
-		}
-		}
+	}
 	}
 
 
 
 
 
-//´¦ÀíºìÍâÊµÊ±ÊÓÆµÊı¾İ£¬Êı¾İ¸ñÊ½Îªyuv422£¬ÓÃÓÚµ÷ÓÃ¶ËÏÔÊ¾Ê¹ÓÃ£¬
-//Í¬Ê±Ò²¿ÉÒÔ¸ù¾İÊµ¼ÊÇé¿ö£¬ÔÚÊµÊ±»­ÃæÖĞ»æÖÆ×Ô¶¨ÒåĞÅÏ¢
-//´Ë´¦Àí¿ÉÒÔµ¥¶À·ÅÔÚ¶ÀÁ¢Ïß³ÌÖĞÖ´ĞĞ£¬±ÜÃâÔÚÔÚcbFuncHandleÖĞÖ´ĞĞ£¬Ó°Ïì»Øµ÷º¯Êı·µ»Ø
+//å¤„ç†çº¢å¤–å®æ—¶è§†é¢‘æ•°æ®ï¼Œæ•°æ®æ ¼å¼ä¸ºyuv422ï¼Œç”¨äºè°ƒç”¨ç«¯æ˜¾ç¤ºä½¿ç”¨ï¼Œ
+//åŒæ—¶ä¹Ÿå¯ä»¥æ ¹æ®å®é™…æƒ…å†µï¼Œåœ¨å®æ—¶ç”»é¢ä¸­ç»˜åˆ¶è‡ªå®šä¹‰ä¿¡æ¯
+//æ­¤å¤„ç†å¯ä»¥å•ç‹¬æ”¾åœ¨ç‹¬ç«‹çº¿ç¨‹ä¸­æ‰§è¡Œï¼Œé¿å…åœ¨åœ¨cbFuncHandleä¸­æ‰§è¡Œï¼Œå½±å“å›è°ƒå‡½æ•°è¿”å›
 void handleYuvData(unsigned char* pYuvData, const int& iLen, const int& iWidth, const int& iHeight) {
-	//ÓÃ»§¿ÉÒÔÊ¹ÓÃyuv422½øĞĞÊµÊ±»­Ãæ»æÖÆ²Ù×÷
+	//ç”¨æˆ·å¯ä»¥ä½¿ç”¨yuv422è¿›è¡Œå®æ—¶ç”»é¢ç»˜åˆ¶æ“ä½œ
 	return;
 }
 
-//×¢²á»Øµ÷ºìÍâÊı¾İ»Øµ÷º¯Êı
+//æ³¨å†Œå›è°ƒçº¢å¤–æ•°æ®å›è°ƒå‡½æ•°
 int cbFuncHandle(CallBackData cbData, void* param) {
-	//ÊµÊ±»­Ãæ¸üĞÂ²Ù×÷
+	//å®æ—¶ç”»é¢æ›´æ–°æ“ä½œ
 	if (cbData.yuvData) {
 		handleYuvData(cbData.yuvData, cbData.yuvLength, cbData.width, cbData.height);
 		printf("yuvLength=%d\n", cbData.yuvLength);
 	}
-	//ÊµÊ±y16²âÎÂÊı¾İ¸üĞÂ²Ù×÷
+	//å®æ—¶y16æµ‹æ¸©æ•°æ®æ›´æ–°æ“ä½œ
 	if (cbData.y16Data) {
 		handleY16Data(cbData.y16Data, cbData.y16Length, cbData.width, cbData.height);
 	}
-	//Ã¿3Ãë²âÒ»´Î
+	//æ¯3ç§’æµ‹ä¸€æ¬¡
 	// 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(40));
 	//while (flat) {
-	//	//ÓÃ»§ÆäËû²Ù×÷
+	//	//ç”¨æˆ·å…¶ä»–æ“ä½œ
 		//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	//}
 	return 0;
@@ -192,22 +196,22 @@ int main()
 	int iWidth = 120;
 	int iHight = 90;
 	int isDebugging = 0;
-	/******************************³õÊ¼»¯sdkÄ£¿é******************************/
+	/******************************åˆå§‹åŒ–sdkæ¨¡å—******************************/
 	g_Module = CreateModuleInstance(whd);
 	MeasureParamsControl(g_Module, DEBUGGING_PATH, (void*)"D:/vs/GuTest/x64/Debug/debug.log");
 	MeasureParamsControl(g_Module, SET_DEBUGGING, &isDebugging);
 	RegisterImgCallBack(g_Module, cbFuncHandle, nullptr, (int)1);
 	if (g_Module) {
-		/******************************ÉèÖÃ²âÎÂ²ÎÊı******************************/
-		//ÉèÖÃ²âÎÂ²ÎÊı£¬¾àÀë²ÎÊı£¬ÉèÖÃÎª0.8Ã×
-		float fDistance = 0.8;
+		/******************************è®¾ç½®æµ‹æ¸©å‚æ•°******************************/
+		//è®¾ç½®æµ‹æ¸©å‚æ•°ï¼Œè·ç¦»å‚æ•°ï¼Œè®¾ç½®ä¸º0.8ç±³
+		float fDistance = 0.8f;
 		if (MeasureParamsControl(g_Module, SET_DISTANCE, (void*)&fDistance) != GUIDEIR_OK) {
 			std::cout << "set distance error!" << std::endl;
 		}
 		else {
 			std::cout << "set distance is"<<fDistance << std::endl;
 		}
-		//ÉèÖÃ²âÎÂ²ÎÊı£¬»·¾³ÎÂ¶È²ÎÊı£¬ÉèÖÃÎª25ÉãÊÏ¶È
+		//è®¾ç½®æµ‹æ¸©å‚æ•°ï¼Œç¯å¢ƒæ¸©åº¦å‚æ•°ï¼Œè®¾ç½®ä¸º25æ‘„æ°åº¦
 		float fEnvironment = 25.0;
 		if (MeasureParamsControl(g_Module, SET_AMBIENT_TEMP, (void*)&fEnvironment) != GUIDEIR_OK) {
 			std::cout << "set environment error!" << std::endl;
@@ -215,7 +219,7 @@ int main()
 		else {
 			std::cout << "set environment is"<< fEnvironment << std::endl;
 		}
-		//ÉèÖÃ³ÉÏñ¸ñÊ½
+		//è®¾ç½®æˆåƒæ ¼å¼
 		int format = 1;
 		if (ImageParamsControl(g_Module, SET_FORMAT, &format)!= GUIDEIR_OK) {
 			std::cout << "set format error!" << std::endl;
@@ -223,7 +227,7 @@ int main()
 		else {
 			std::cout << "set format is" << format << std::endl;
 		}
-		////ÉèÖÃ¿ìÃÅ
+		////è®¾ç½®å¿«é—¨
 		//int shutter = 0;
 		//if (ImageParamsControl(g_Module, SET_FORMAT, &shutter) != GUIDEIR_OK) {
 		//	std::cout << "set shutter error!" << std::endl;
@@ -233,14 +237,14 @@ int main()
 		//}
 	}
 
-	/******************************ÓÃ»§Ïß³ÌÆäËû²Ù×÷******************************/
+	/******************************ç”¨æˆ·çº¿ç¨‹å…¶ä»–æ“ä½œ******************************/
 	while (true) {
-		//ÓÃ»§ÆäËû²Ù×÷
+		//ç”¨æˆ·å…¶ä»–æ“ä½œ
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 
 	}
-	/******************************ÊÍ·ÅsdkÄ£¿é******************************/
-	//³ÌĞòÍË³öÊ±µ÷ÓÃ
+	/******************************é‡Šæ”¾sdkæ¨¡å—******************************/
+	//ç¨‹åºé€€å‡ºæ—¶è°ƒç”¨
 	if (g_Module) {
 		DestroyModuleInstance(g_Module);
 		g_Module = 0;
